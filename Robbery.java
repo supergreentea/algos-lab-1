@@ -13,6 +13,8 @@ public class Robbery {
 		int[] worths
 	) {
 		// fill in here, change the return
+			int i, w;
+			int K[][]
 			return 0;
 	}
 
@@ -22,7 +24,23 @@ public class Robbery {
 		int[] worths
 	) {
 		// fill in here, change the return
-		return 0;
+		int i, w = 0;
+		int n = sizes.length;
+		int K[][] = new int[n + 1][capacity + 1];
+  
+		for (i = 0; i <= n; i++) {
+		  for (w = 0; w <= capacity; w++) {
+			if (i == 0 || w == 0) {
+			  K[i][w] = 0;
+			} else if (worths[i - 1] <= w) {
+			  K[i][w] = max(worths[i-1] + K[i-1][w-sizes[i-1]], K[i-1][w]);
+			} else {
+			  K[i][w] = K[i-1][w];
+			}
+		  } 
+		}
+		
+		return K[n][w];
 	}
 
 /**
